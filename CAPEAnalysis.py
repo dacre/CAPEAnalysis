@@ -12,7 +12,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-starcapital_url = "http://www.starcapital.de/test/Res_Stockmarketvaluation_FundamentalKZ_Tbl.php"
+starcapital_url = "https://www.starcapital.de/fileadmin/charts/Res_Aktienmarktbewertungen_FundamentalKZ_Tbl.php?lang=en"
 etfdb_url = "http://etfdb.com/country/"
 
 
