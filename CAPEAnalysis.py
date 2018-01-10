@@ -98,7 +98,7 @@ if __name__ == '__main__':
             print("No command line arguments supplied. (Looking for: From Email, From Email Password, To Email)")
         else:
             message = etf +  ". (Utav: " + countries_string + ")"
-            send_email("Kvartalets ETF!", etf)
+            send_email("Kvartalets ETF!", message)
     except LookupError as le:
         if len(sys.argv) != 4:
             print(le.message)
