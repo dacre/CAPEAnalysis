@@ -22,7 +22,7 @@ def get_json():
     return parsed_json
 
 
-def get_country(parsed_json, offset):
+def get_countries(parsed_json, number_of_countries):
     country_list = parsed_json['rows']
     curated_list = []
 
@@ -36,7 +36,10 @@ def get_country(parsed_json, offset):
         top10.append(curated_list[i])
     top10.sort(key=lambda x: (x['c'][9]['v'], x['c'][8]['v']), reverse=True)
 
-    return top10[0+offset]['c'][0]['v']
+    countries = []
+    for i in range(0,number_of_countries):
+        countries.append(top10[0+i]['c'][0]['v'])
+    return countries
 
 
 def get_etf(lookup_country):
@@ -77,8 +80,10 @@ def send_email(subject, email_body):
 if __name__ == '__main__':
     try:
         json = get_json()
-        for i in range(0,3):
-            country = get_country(json, i)
+        etf = ""
+        countries = get_countries(json, 5)
+        print(countries)
+        for country in countries:
             etf = get_etf(country)
             if etf != "":
                 break
@@ -87,10 +92,11 @@ if __name__ == '__main__':
             if etf == "":
                 print("No ETF found!")
             else:
-                print("Found an ETF: " + etf)
+                print("Found an ETF: " + etf + ". Topp 5 länder: " + str(countries))
         elif len(sys.argv) != 4:
             print("No command line arguments supplied. (Looking for: From Email, From Email Password, To Email)")
         else:
+            message = etf +  ". Topp 5 länder: " + str(countries)
             send_email("Kvartalets ETF!", etf)
     except LookupError as le:
         if len(sys.argv) != 4:
