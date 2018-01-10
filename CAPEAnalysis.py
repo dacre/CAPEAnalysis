@@ -92,11 +92,11 @@ if __name__ == '__main__':
             if etf == "":
                 print("No ETF found!")
             else:
-                print("Found an ETF: " + etf + ". Topp 5 länder: " + str(countries))
+                print("Found an ETF: " + etf + ". Urval: " + str(countries))
         elif len(sys.argv) != 4:
             print("No command line arguments supplied. (Looking for: From Email, From Email Password, To Email)")
         else:
-            message = etf +  ". Topp 5 länder: " + str(countries)
+            message = etf +  ". Urval: " + str(countries)
             send_email("Kvartalets ETF!", etf)
     except LookupError as le:
         if len(sys.argv) != 4:
