@@ -82,7 +82,8 @@ if __name__ == '__main__':
         json = get_json()
         etf = ""
         countries = get_countries(json, 5)
-        print(countries)
+        countries_string = ' '.join(countries)
+        print(countries_string)
         for country in countries:
             etf = get_etf(country)
             if etf != "":
@@ -92,11 +93,11 @@ if __name__ == '__main__':
             if etf == "":
                 print("No ETF found!")
             else:
-                print("Found an ETF: " + etf + ". Urval: " + str(countries))
+                print("Found an ETF: " + etf + ". (Utav: " + countries_string + ")")
         elif len(sys.argv) != 4:
             print("No command line arguments supplied. (Looking for: From Email, From Email Password, To Email)")
         else:
-            message = etf +  ". Urval: " + str(countries)
+            message = etf +  ". (Utav: " + countries_string + ")"
             send_email("Kvartalets ETF!", etf)
     except LookupError as le:
         if len(sys.argv) != 4:
